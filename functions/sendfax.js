@@ -1,9 +1,3 @@
-import dotenv from 'dotenv'
-import querystring from 'querystring'
-import Phaxio from 'phaxio-official'
-
-dotenv.config()
-
 exports.handler = async (event, context, callback) => {
 
   /*
@@ -14,6 +8,10 @@ exports.handler = async (event, context, callback) => {
     body: `hello ${process.env.TEST || 'env not set'}`
   });
   */
+
+  require('dotenv').config()
+  let querystring = require('querystring')
+  let Phaxio = require('phaxio-official')
 
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
