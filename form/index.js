@@ -20,6 +20,9 @@ let Form = () => {
               foo: 'test123'
             })
           }).then(r => r.text())
+            .catch(error => {
+              console.log('error', error.message)
+            })
           console.log(response)
         }}
       >send fax</button>
