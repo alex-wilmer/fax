@@ -9,6 +9,9 @@
     "dev": "parcel form/index.html",
     "build": "parcel build form/index.html"
   },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
   "dependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
