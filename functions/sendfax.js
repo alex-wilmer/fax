@@ -1,4 +1,4 @@
-exports.handler = async (event, context, callback) => {
+exports.handler = async (event, context) => {
 
   /*
   this works, keep this as an exmaple
@@ -39,13 +39,13 @@ exports.handler = async (event, context, callback) => {
     .then(status => {
       return {
         statusCode: 300,
-        body: `Fax status response:\n ${JSON.stringify(status, null, 2)}, ${params}`
+        body: `Fax status response:\n ${JSON.stringify(status, null, 2)}`
       };
     })
     .catch(err => {
       return {
         statusCode: 500,
-        body: `something broke ${JSON.stringify(err.message, null, 2)}, ${params}`
+        body: `something broke ${JSON.stringify(err.message, null, 2)}`
       };
     });
 }
