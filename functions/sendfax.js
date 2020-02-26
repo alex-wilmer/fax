@@ -1,6 +1,8 @@
 exports.handler = function (event, context, callback) {
+  require('dotenv').config()
+
   callback(null, {
     statusCode: 200,
-    body: "Hello, World"
-  })
+    body: `hello ${process.env.TEST || 'nope'}`
+  });
 }

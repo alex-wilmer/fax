@@ -13,6 +13,8 @@
     "last 1 Chrome versions"
   ],
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "phaxio-official": "^1.2.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
