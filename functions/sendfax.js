@@ -1,5 +1,10 @@
-exports.handler = function (event, context, callback) {
-  require('dotenv').config()
+import dotenv from 'dotenv'
+import querystring from 'querystring'
+import Phaxio from 'phaxio-official'
+
+dotenv.config()
+
+exports.handler = async (event, context, callback) => {
 
   /*
   this works, keep this as an exmaple
@@ -10,18 +15,21 @@ exports.handler = function (event, context, callback) {
   });
   */
 
-  const to = '+18556993366'
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
 
-  const Phaxio = require('phaxio-official');
+  const params = querystring.parse(event.body);
+  const to = '+18556993366'
   const phaxio = new Phaxio(process.env.PHAXIOKEY, process.env.PHAXIOSECRET);
 
   // Send a single fax containing two documents: one a URL, one from the filesystem.
-  phaxio.faxes.create({
+  return phaxio.faxes.create({
     // to: process.env.FAXNUM, // Replace this with a number that can receive faxes.
     to,
     content_url: 'https://pawprintoxygen.com/',
   })
-    .then(async (fax) => {
+    .then(fax => {
       // The `create` method returns a fax object with methods attached to it for doing things
       // like cancelling, resending, getting info, etc.
 
@@ -31,15 +39,15 @@ exports.handler = function (event, context, callback) {
       }, 5000))
     })
     .then(status => {
-      callback(null, {
+      return {
         statusCode: 300,
-        body: `Fax status response:\n ${JSON.stringify(status, null, 2)}`
-      });
+        body: `Fax status response:\n ${JSON.stringify(status, null, 2)}, ${params}`
+      };
     })
-    .catch((err) => {
-      callback(null, {
+    .catch(err => {
+      return {
         statusCode: 500,
-        body: `something broke ${JSON.stringify(err.message, null, 2)}`
-      });
+        body: `something broke ${JSON.stringify(err.message, null, 2)}, ${params}`
+      };
     });
 }

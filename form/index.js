@@ -11,7 +11,15 @@ let Form = () => {
       <input value={text} onChange={e => setText(e.target.value)} />
       <button
         onClick={async () => {
-          let response = await fetch(`${fnsFolder}/sendfax`).then(r => r.text())
+          let response = await fetch(`${fnsFolder}/sendfax`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              foo: 'test123'
+            })
+          }).then(r => r.text())
           console.log(response)
         }}
       >send fax</button>
