@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { render } from 'react-dom'
 
-let endpoint = '.netlify/functions/sendFax'
+let fnsFolder = '.netlify/functions/'
 
 let Form = () => {
   let [text, setText] = useState('')
@@ -11,7 +11,7 @@ let Form = () => {
       <input value={text} onChange={e => setText(e.target.value)} />
       <button
         onClick={async () => {
-          let response = await fetch(endpoint).then(r => r.text())
+          let response = await fetch(`${fnsFolder}/sendfax}`).then(r => r.text())
           console.log(response)
         }}
       >send fax</button>
