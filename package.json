@@ -1,0 +1,8 @@
+{
+  "name": "fax",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alex-wilmer/fax.git",
+  "author": "Alex Wilmer <djazium@gmail.com>",
+  "license": "MIT"
+}
