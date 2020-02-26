@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { render } from 'react-dom'
 
-let fnsFolder = '.netlify/functions/'
+let fnsFolder = '.netlify/functions'
 
 let Form = () => {
   let [text, setText] = useState('')
