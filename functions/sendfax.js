@@ -39,13 +39,13 @@ exports.handler = async (event, context) => {
     .then(status => {
       return {
         statusCode: 300,
-        body: `Fax status response:\n ${JSON.stringify(status, null, 2)}`
+        body: `Fax status response:\n ${JSON.stringify(status, null, 2)} testing! ${params.foo}`
       };
     })
     .catch(err => {
       return {
         statusCode: 500,
-        body: `something broke ${JSON.stringify(err.message, null, 2)}`
+        body: `something broke ${JSON.stringify(err.message, null, 2)} testing! ${params.foo}`
       };
     });
 }
