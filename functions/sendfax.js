@@ -19,9 +19,9 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
+  let params = querystring.parse(event.body);
   let { ownerName, faxNum } = params
 
-  let params = querystring.parse(event.body);
   let phaxio = new Phaxio(process.env.PHAXIOKEY, process.env.PHAXIOSECRET);
 
   let path = __dirname + '/fax-' + uuid.v4() + '.html'
