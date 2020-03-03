@@ -12,8 +12,8 @@ exports.handler = async (event, context) => {
 
   let querystring = require('querystring')
   let Phaxio = require('phaxio-official')
-  let uuid = require('uuid')
-  let fs = require('fs')
+  // let uuid = require('uuid')
+  // let fs = require('fs')
 
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
@@ -24,20 +24,21 @@ exports.handler = async (event, context) => {
 
   let phaxio = new Phaxio(process.env.PHAXIOKEY, process.env.PHAXIOSECRET);
 
-  let path = __dirname + '/fax-' + uuid.v4() + '.html'
+  // let path = __dirname + '/fax-' + uuid.v4() + '.html'
 
-  fs.writeFileSync(path,
-    `<div>Owner Name: ${ownerName}</div>`
-  );
+  // fs.writeFileSync(path,
+  // `<div>Owner Name: ${ownerName}</div>`
+  // );
 
 
   // Send a single fax containing two documents: one a URL, one from the filesystem.
   return phaxio.faxes.create({
     to: faxNum,
-    file: path,
+    string_data: `<h1>testingtesting</h1>`,
+    string_data_type: 'html'
   })
     .then(fax => {
-      fs.unlinkSync(path)
+      // fs.unlinkSync(path)
       // The `create` method returns a fax object with methods attached to it for doing things
       // like cancelling, resending, getting info, etc.
 
@@ -53,7 +54,7 @@ exports.handler = async (event, context) => {
       };
     })
     .catch(err => {
-      fs.unlinkSync(path)
+      // fs.unlinkSync(path)
 
       return {
         statusCode: 500,
